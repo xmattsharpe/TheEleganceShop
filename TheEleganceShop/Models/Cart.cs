@@ -9,5 +9,10 @@
         public int? CustomerID { get; set; }
         public Customer? Customer { get; set; }
 
+
+        // Navigation list to the junction table 
+        public List <CartProduct>? CartProducts { get; set; }
+
+
     }
 }

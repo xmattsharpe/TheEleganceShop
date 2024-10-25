@@ -24,8 +24,7 @@ namespace TheEleganceShop.Models
         public string? CustomerZip { get; set; }
 
 
-        // List navigation property to the Cart model
-
+        
 
 
     }
