@@ -3,8 +3,57 @@
 @{
     ViewData["Title"] = "Home";
 }
+<style>
+    #headline{
+        font-weight: 400;
+        text-align: center;
+        
+
+    }
+
+</style>
+
 
 <div class="text-center">
     <h1 class="display-4">The Luxury Elegance Shop</h1>
-    
+    <hr />
 </div>
+
+<form method="post"> 
+    
+
+    <div class="form-group">
+        <label for="search">Search Products</label>
+        <input type="search" id="search" name="search" class="form-control" placeholder="What can we help you find" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+
+    <h2 id="headline"> New and trendy </h2>
+
+    <div class="container">
+        <div class="row">
+            <!-- Product 1 -->
+            <div class="col-md-3">
+                <img src="/img/Zebra1.jpg" class="img-fluid" alt="Shoe1" />
+                <p class="text-center">Zebra Yeezy Boost 350 V2</p>
+            </div>
+            <!-- Product 2 -->
+            <div class="col-md-3">
+                <img src="/img/J11.jpg" class="img-fluid" alt="Shoe2" />
+                <p class="text-center">Jordan 11 Concord</p>
+            </div>
+            <!-- Product 3 -->
+            <div class="col-md-3">
+                <img src="/img/j4.jpg" class="img-fluid" alt="Shoe3" />
+                <p class="text-center">Jordan 4 Lightning </p>
+            </div>
+            <!-- Product 4 -->
+            <div class="col-md-3">
+                <img src="/img/cactus.jpg" class="img-fluid" alt="Shoe4" />
+                <p class="text-center">Nike Cactus Flee Plant</p>
+            </div>
+        </div>
+    </div>
+
+</form>

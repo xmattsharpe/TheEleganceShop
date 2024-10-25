@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheEleganceShop.Data;
 
@@ -11,9 +12,11 @@ using TheEleganceShop.Data;
 namespace TheEleganceShop.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241025035031_initialCartProduct")]
+    partial class initialCartProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,9 +313,6 @@ namespace TheEleganceShop.Data.Migrations
                     b.Property<int?>("ProductQuantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductShoeSize")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderDetailID");
 
                     b.HasIndex("OrderHeaderID");
@@ -368,9 +368,6 @@ namespace TheEleganceShop.Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductID"));
-
-                    b.Property<string>("ProductCategory")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductDescription")
                         .HasColumnType("nvarchar(max)");

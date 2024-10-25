@@ -1,0 +1,70 @@
+﻿@page
+@model TheEleganceShop.Pages.OrderHeaders.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>OrderHeader</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="OrderHeader.OrderHeaderId" />
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderDate" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderDate" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderStatus" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderStatus" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderAmount" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderAmount" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderPaymentMethod" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderPaymentMethod" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderPaymentMethod" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderShippingAddress" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderShippingAddress" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderShippingAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderCity" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderCity" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.OrderZipCode" class="control-label"></label>
+                <input asp-for="OrderHeader.OrderZipCode" class="form-control" />
+                <span asp-validation-for="OrderHeader.OrderZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderHeader.CustomerId" class="control-label"></label>
+                <select asp-for="OrderHeader.CustomerId" class="form-control" asp-items="ViewBag.CustomerId"></select>
+                <span asp-validation-for="OrderHeader.CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

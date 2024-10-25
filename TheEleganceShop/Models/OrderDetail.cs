@@ -2,10 +2,10 @@
 {
     public class OrderDetail
     {
-        public int OrderDetailsID { get; set; }
+        public int OrderDetailID { get; set; }
         public int? ProductQuantity { get; set; }
 
-
+        public int? ProductShoeSize { get; set; }
 
 
         // FK's to product and orderheader
