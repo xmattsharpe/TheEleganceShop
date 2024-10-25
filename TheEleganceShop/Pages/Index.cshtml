@@ -4,24 +4,25 @@
     ViewData["Title"] = "Home";
 }
 <style>
-    #headline{
+    #headline {
         font-weight: 400;
         text-align: center;
-        
-
     }
 
+    .product-img {
+        height: 250px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
 </style>
-
 
 <div class="text-center">
     <h1 class="display-4">The Luxury Elegance Shop</h1>
     <hr />
 </div>
 
-<form method="post"> 
-    
-
+<form method="post">
     <div class="form-group">
         <label for="search">Search Products</label>
         <input type="search" id="search" name="search" class="form-control" placeholder="What can we help you find" />
@@ -29,31 +30,36 @@
 
     <button type="submit" class="btn btn-primary">Search</button>
 
-    <h2 id="headline"> New and trendy </h2>
-
+    <h2 id="headline">New and trendy</h2>
     <div class="container">
         <div class="row">
             <!-- Product 1 -->
             <div class="col-md-3">
-                <img src="/img/Zebra1.jpg" class="img-fluid" alt="Shoe1" />
+                <img src="/img/Zebra1.jpg" class="img-fluid product-img" alt="Shoe1" />
                 <p class="text-center">Zebra Yeezy Boost 350 V2</p>
+                <a asp-page="/Products/Details" asp-route-id="1" class="btn btn-secondary btn-block">View</a>
             </div>
+
             <!-- Product 2 -->
             <div class="col-md-3">
-                <img src="/img/J11.jpg" class="img-fluid" alt="Shoe2" />
+                <img src="/img/J11.jpg" class="img-fluid product-img" alt="Shoe2" />
                 <p class="text-center">Jordan 11 Concord</p>
+                <a asp-page="/Products/Details" asp-route-id="2" class="btn btn-secondary btn-block">View</a>
             </div>
+
             <!-- Product 3 -->
             <div class="col-md-3">
-                <img src="/img/j4.jpg" class="img-fluid" alt="Shoe3" />
-                <p class="text-center">Jordan 4 Lightning </p>
+                <img src="/img/j4.jpg" class="img-fluid product-img" alt="Shoe3" />
+                <p class="text-center">Jordan 4 Lightning</p>
+                <a asp-page="/Products/Details" asp-route-id="3" class="btn btn-secondary btn-block">View</a>
             </div>
+
             <!-- Product 4 -->
             <div class="col-md-3">
-                <img src="/img/cactus.jpg" class="img-fluid" alt="Shoe4" />
+                <img src="/img/cactus.jpg" class="img-fluid product-img" alt="Shoe4" />
                 <p class="text-center">Nike Cactus Flee Plant</p>
+                <a asp-page="/Products/Details" asp-route-id="4" class="btn btn-secondary btn-block">View</a>
             </div>
         </div>
     </div>
-
 </form>

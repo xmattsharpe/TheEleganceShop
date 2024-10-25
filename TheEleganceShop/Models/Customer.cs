@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace TheEleganceShop.Models
@@ -6,7 +7,7 @@ namespace TheEleganceShop.Models
     public class Customer
     {
 
-        public int? CustomerID { get; set;}
+        public int CustomerID { get; set; }
         // FULL NAME
         [Display(Name = "Full Name")]
         public string? CustomerName { get; set;}

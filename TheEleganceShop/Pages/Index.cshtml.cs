@@ -12,9 +12,21 @@ namespace TheEleganceShop.Pages
             _logger = logger;
         }
 
+
+
         public void OnGet()
         {
 
+        }
+
+        public async Task<IActionResult> OnPostAddToCartAsync(int productId)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
+
+            return RedirectToPage();
         }
     }
 }
