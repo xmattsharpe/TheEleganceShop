@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace TheEleganceShop.Pages
 {
-    [Authorize]
+    [Authorize (Roles ="Employee")]
     public class PrivacyModel : PageModel
     {
         private readonly ILogger<PrivacyModel> _logger;
