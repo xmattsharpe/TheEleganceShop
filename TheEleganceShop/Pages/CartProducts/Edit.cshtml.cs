@@ -37,7 +37,7 @@ namespace TheEleganceShop.Pages.CartProducts
             }
             CartProduct = cartproduct;
            ViewData["CartID"] = new SelectList(_context.Cart, "CartID", "CartID");
-           ViewData["ProductID"] = new SelectList(_context.Set<Product>(), "ProductID", "ProductID");
+           ViewData["ProductID"] = new SelectList(_context.Product, "ProductID", "ProductID");
             return Page();
         }
 

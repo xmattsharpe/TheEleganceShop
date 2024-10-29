@@ -20,6 +20,8 @@
      body {
         background-color: black;
     }
+
+    
 </style>
 
 <div class="text-center">
@@ -29,7 +31,7 @@
 
 <form method="post">
     <div class="form-group">
-        <label for="search" style="color: white;">Search Products</label>
+        <label for="search" style="color: white;">Search Our Products</label>
         <input type="search" id="search" name="search" class="form-control" placeholder="What can we help you find" />
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
@@ -87,3 +89,56 @@
             </div>
         </div>
     </div>
+
+
+<hr style = "color: red"> 
+
+<h2 id="headline">Our Most Popular Yeezy's</h2>
+<div class="container">
+    <div class="row">
+        
+        <div class="col-md-2">
+            <img src="/img/onyx1.jpg" class="img-fluid product-img" alt="" />
+            <p class="text-center" style="color: white;">Yeezy Slide Onyx</p>
+            <a asp-page="/Products/Details" asp-route-id="5" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        <div class="col-md-2">
+            <img src="/img/FoamSlide.jpeg" class="img-fluid product-img" alt="Foam Slides" />
+            <p class="text-center" style="color: white;"> Yeezy Foam Runner 'Slate'</p>
+            <a asp-page="/Products/Details" asp-route-id="6" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        <div class="col-md-2">
+            <img src="/img/Boost.jpg" class="img-fluid product-img" alt="Magnet" />
+            <p class="text-center" style="color: white;">Yeezy Boost 700 'Magnet'</p>
+            <a asp-page="/Products/Details" asp-route-id="7" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        <div class="col-md-2">
+            <img src="/img/Yeezy500.jpg" class="img-fluid product-img" alt="BLUSH" />
+            <p class="text-center" style="color: white;">Yeezy Boost5 500 'Blush'</p>
+            <a asp-page="/Products/Details" asp-route-id="8" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        <div class="col-md-2">
+            <img src="/img/Pirates.jpg" class="img-fluid product-img" alt="Pirates" />
+            <p class="text-center" style="color: white;">Yeezy Boost 350 'Pirate Black'</p>
+            <a asp-page="/Products/Details" asp-route-id="9" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        <div class="col-md-2">
+            <img src="/img/InsulatedBoot.jpg" class="img-fluid product-img" alt="Boots" />
+            <p class="text-center" style="color: white;">Yeezy Insulated Boots</p>
+            <a asp-page="/Products/Details" asp-route-id="10" class="btn btn-secondary btn-block">View</a>
+        </div>
+
+        
+        
+    </div>
+</div>
