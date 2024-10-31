@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.CodeAnalysis.Elfie.Diagnostics;
+
 using Microsoft.EntityFrameworkCore;
 using TheEleganceShop.Data;
 using TheEleganceShop.Models;
@@ -28,20 +28,21 @@ namespace TheEleganceShop.Pages
         {
             if (!string.IsNullOrEmpty(search))
             {
-                // Search for products in the database
+                
                 SearchResults = await _context.Product
-                    .Where(p => p.ProductName.Contains(search)) // Modify this as needed for case sensitivity
+                    .Where(p => p.ProductName.Contains(search)) 
                     .ToListAsync();
             }
             else
             {
-                SearchResults = new List<Product>(); // No results if search is empty
+                SearchResults = new List<Product>(); 
             }
 
-            return Page(); // Return the same page with the results
+            return Page(); 
         }
         public async Task<IActionResult> OnPostAddToCartAsync(int productId)
         {
+            // Only allow user to add an item if they are signed in, ELSE REDIRECT
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToPage("/Account/Login", new { area = "Identity" });

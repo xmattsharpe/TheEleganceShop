@@ -32,14 +32,16 @@
 <form method="post">
     <div class="form-group">
         <label for="search" style="color: white;">Search Our Products</label>
-        <input type="search" id="search" name="search" class="form-control" placeholder="What can we help you find" />
+        <input type="search" id="search" name="search" class="form-control" placeholder="What can we help you find " />
         <button type="submit" class="btn btn-primary">Search</button>
     </div>
 </form>
 
 
     
+<!-- ONLY rendering the attributes of my product if their search is valid and >1 is returned..
 
+-->
 
 @if (Model.SearchResults != null && Model.SearchResults.Any())
 {
@@ -48,40 +50,43 @@
         @foreach (var product in Model.SearchResults)
         {
             <li class="list-group-item">
-                <img src="@product.ProductImageUrl" alt="@product.ProductName" class="img-fluid" style="max-width: 150px;" />
+                <img src="@product.ProductImageUrl" alt="@product.ProductName" class="img-fluid " style="max-width: 150px;" />
+
                 <h5>@product.ProductName</h5>
-                <p>@product.ProductDescription</p>
-                <p>Price: @product.ProductPrice USD</p>
+                <p>@product.ProductDescription </p>
+                <p> Price: @product.ProductPrice USD</p>
                 
             </li>
         }
     </ul>
 }
     <h2 id="headline">New and trendy</h2>
+
     <div class="container">
         <div class="row">
-            <!-- Product 1 -->
+
+           <!-- Main 4 products that I want user seeing -->
+            
             <div class="col-md-3">
                 <img src="/img/Zebra1.jpg" class="img-fluid product-img" alt="Shoe1" />
                 <p class="text-center" style="color: white;">Zebra Yeezy Boost 350 V2</p>
                 <a asp-page="/Products/Details" asp-route-id="1" class="btn btn-secondary btn-block">View</a>
             </div>
 
-            <!-- Product 2 -->
+            
             <div class="col-md-3">
                 <img src="/img/J11.jpg" class="img-fluid product-img" alt="Shoe2" />
                 <p class="text-center" style="color: white;">Jordan 11 Concord</p>
                 <a asp-page="/Products/Details" asp-route-id="2" class="btn btn-secondary btn-block">View</a>
             </div>
 
-            <!-- Product 3 -->
+          
             <div class="col-md-3">
                 <img src="/img/j4.jpg" class="img-fluid product-img" alt="Shoe3" />
                 <p class="text-center" style="color: white;">Jordan 4 Lightning</p>
                 <a asp-page="/Products/Details" asp-route-id="3" class="btn btn-secondary btn-block">View</a>
             </div>
 
-            <!-- Product 4 -->
             <div class="col-md-3">
                 <img src="/img/cactus.jpg" class="img-fluid product-img" alt="Shoe4" />
                 <p class="text-center" style="color: white;">Nike Cactus Flee Plant</p>
@@ -98,9 +103,9 @@
     <div class="row">
         
         <div class="col-md-2">
-            <img src="/img/onyx1.jpg" class="img-fluid product-img" alt="" />
+            <img src="/img/onyx1.jpg" class="img-fluid product-img" alt="ONYX" />
             <p class="text-center" style="color: white;">Yeezy Slide Onyx</p>
-            <a asp-page="/Products/Details" asp-route-id="5" class="btn btn-secondary btn-block">View</a>
+            <a asp-page="/Products/Details" asp-route-id="5" class="btn btn-secondary btn-block ">View</a>
         </div>
 
         
@@ -141,4 +146,6 @@
         
         
     </div>
+
+
 </div>

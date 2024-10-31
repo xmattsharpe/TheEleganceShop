@@ -6,7 +6,7 @@ namespace TheEleganceShop.Models
 {
     public class Customer
     {
-
+        // I have not deleted this model yet but likely will, it still has a relationship to orders
         public int CustomerID { get; set; }
         // FULL NAME
         [Display(Name = "Full Name")]

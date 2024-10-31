@@ -18,6 +18,8 @@
     }
 </style>
 
+<!-- I have not found a way to render user name here yet -->
+
 <h2>Your Shopping Cart </h2>
 
 @if (Model.CartProducts.Any())
@@ -26,6 +28,7 @@
         <thead>
             <tr>
                 <th>Product Name</th>
+
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
@@ -33,16 +36,22 @@
             </tr>
         </thead>
         <tbody>
+
+            <!-- display each instance of the product and its attributes -->
             @foreach (var cartProduct in Model.CartProducts)
             {
                 <tr>
                     <td>@cartProduct.Product.ProductName</td>
                     <td>@cartProduct.Quantity</td>
                     <td>@cartProduct.Product.ProductPrice</td> 
+
+                   <!-- A horizontal sum of the price, not a total sum. I am looking for a way to do a total sum-->
                     <td>@(cartProduct.Quantity * cartProduct.Product.ProductPrice)</td> 
                     <td>
-                        <!-- Form to remove item from cart -->
-                        <form method="post" asp-page-handler="RemoveFromCart" style="display:inline;">
+
+
+                        <!-- The REMOVE button is not displaying properly on my laptop but seems to render correctly on my desktop -->
+                        <form method="post"   asp-page-handler="RemoveFromCart" style="display:inline;">
                             <input type="hidden" name="cartProductId" value="@cartProduct.CartProductID" />
                             <button type="submit" class="btn btn-danger btn-sm">Remove</button>
                         </form>
@@ -50,8 +59,11 @@
                 </tr>
             }
         </tbody>
+
+
     </table>
 }
+
 else
 {
     <p>Your cart is empty.</p>

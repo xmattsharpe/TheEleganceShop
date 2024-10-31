@@ -55,9 +55,11 @@
     </dl>
 </div>
 
-<!-- Add to Cart Form -->
+<!-- Form for my button to add to the cart -->
 <form method="post" asp-page-handler="AddToCart" asp-route-id="@Model.Product.ProductID">
     <input type="hidden" asp-for="Product.ProductID" />
+
+
     <button type="submit" class="btn btn-primary">Add to Cart</button>
 </form>
 

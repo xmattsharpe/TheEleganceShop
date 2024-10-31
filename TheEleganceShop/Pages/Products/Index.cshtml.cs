@@ -10,6 +10,9 @@ using TheEleganceShop.Models;
 
 namespace TheEleganceShop.Pages.Products
 {
+
+    // Matthew Sharpe 
+    //Manuel Zubiri
     public class IndexModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;

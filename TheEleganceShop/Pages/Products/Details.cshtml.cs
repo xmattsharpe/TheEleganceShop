@@ -44,18 +44,21 @@ namespace TheEleganceShop.Pages.Products
         public async Task<IActionResult> OnPostAddToCartAsync(int id)
         {
             // Grab information about the currently logged in user 
+            // I found this FirstFind method on stack overflow and it works for grabbing the claims about the signed in user
+            // I still has a customer model that I have not deleted yet...
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
-                return Forbid(); //      No logged in user
+                return Forbid(); //     NOT LOGGED IN 
             }
 
             // Searching for the users cart, return only 1 cart with first or default 
             var cart = await _context.Cart
                 .Include(c => c.CartProducts)
+                // match condition.
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
-            // adding the cart if it did not exist
+            // adding the cart if it did not exist // cart object
             if (cart == null)
             {
                 cart = new Cart { UserId = userId };
@@ -63,7 +66,7 @@ namespace TheEleganceShop.Pages.Products
                 await _context.SaveChangesAsync();
             }
 
-            // grab the product to be added to their cart based on the passed id parameter and query the db
+            // grab the product
             var product = await _context.Product.FindAsync(id);
             if (product == null)
             {
