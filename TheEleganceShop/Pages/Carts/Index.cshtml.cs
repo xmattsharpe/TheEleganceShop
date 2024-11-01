@@ -32,21 +32,18 @@ namespace TheEleganceShop.Pages.Carts
 
         public async Task OnGetAsync()
         {
-
-            // I found this claims method on stack overflow
-            // it seems to work as expected using the currently signed in user data
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
             if (!string.IsNullOrEmpty(userId))
             {
-                
+                // grabbing the user's cart along with all cartproducts, for the user who is signed in
                 Cart = await _context.Cart
                     .Include(c => c.CartProducts)
                         .ThenInclude(cp => cp.Product) 
                     .FirstOrDefaultAsync(c => c.UserId == userId); 
 
                 
-
+                // If the user has a cart, the products in their cart are still assigned to cartproducts.
                 if (Cart != null)
                 {
                     CartProducts = Cart.CartProducts ?? new List<CartProduct>(); 
@@ -59,10 +56,13 @@ namespace TheEleganceShop.Pages.Carts
 
             // finding the product based on the passed ID
             var cartProduct = await _context.CartProduct.FindAsync(cartProductId);
+
+            // if the product exists in their cart, I am removing it to execute against DB.
             if (cartProduct != null)
             {
                 // only if the passed id is not null, execute the save against the db
                 _context.CartProduct.Remove(cartProduct);
+
                 await _context.SaveChangesAsync();
             }
 

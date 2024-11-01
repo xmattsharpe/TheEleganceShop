@@ -11,7 +11,7 @@ using TheEleganceShop.Models;
 
 namespace TheEleganceShop.Pages.Products
 {
-    [Authorize(Roles = "Employee")]
+    
     public class DeleteModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;

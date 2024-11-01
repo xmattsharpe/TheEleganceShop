@@ -12,7 +12,7 @@ using TheEleganceShop.Models;
 namespace TheEleganceShop.Pages.Products
 {
 
-    [Authorize(Roles = "Employee")]
+    
     public class CreateModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;
