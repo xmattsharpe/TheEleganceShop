@@ -1,0 +1,88 @@
+﻿@page
+@model TheEleganceShop.Pages.OrderHeaders.CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+<style>
+    body {
+        background-color: black;
+        font-weight: 400;
+        text-align: center;
+        color: white;
+    }
+
+    th, td {
+        color: white;
+    }
+</style>
+
+<h2> Order Summary </h2>
+
+@if (Model.CartProducts.Any())
+
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cartProduct in Model.CartProducts)
+            {
+                <tr>
+                    <td>@cartProduct.Product.ProductName</td>
+                    <td>@cartProduct.Quantity</td>
+                    <td>@cartProduct.Product.ProductPrice</td>
+                    <td>@(cartProduct.Quantity * cartProduct.Product.ProductPrice)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p><strong>Total Amount:</strong> $@Model.TotalAmount</p>
+}
+else
+{
+    <p>Your cart is empty.</p>
+}
+
+<h2> Payment & Shipping Details </h2>
+<form method="post">
+
+    <div class="form-group">
+        <label asp-for="OrderHeader.OrderPaymentMethod">Payment Method</label>
+        <select asp-for="OrderHeader.OrderPaymentMethod" class="form-control" required>
+            <option value="">Select a payment method</option>
+            <option value="Credit Card">Credit Card</option>
+            <option value="Debit Card">Debit Card</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderHeader.OrderPaymentCard">Card Number</label>
+        <input asp-for="OrderHeader.OrderPaymentCard" type="text" class="form-control" maxlength="16" placeholder="Enter card number" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderHeader.OrderShippingAddress">Shipping Address</label>
+        <input asp-for="OrderHeader.OrderShippingAddress" type="text" class="form-control" placeholder="Enter shipping address" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderHeader.OrderCity">City</label>
+        <input asp-for="OrderHeader.OrderCity" type="text" class="form-control" placeholder="Enter city" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="OrderHeader.OrderZipCode">Zip Code</label>
+        <input asp-for="OrderHeader.OrderZipCode" type="text" class="form-control" maxlength="10" placeholder="Enter zip code" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Place Order</button>
+
+
+
+</form>

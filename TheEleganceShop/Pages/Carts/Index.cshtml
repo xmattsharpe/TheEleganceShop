@@ -18,7 +18,6 @@
     }
 </style>
 
-<!-- I have not found a way to render user name here yet -->
 
 <h2>Your Shopping Cart </h2>
 
@@ -27,7 +26,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th> Select </th>
+               
                 <th>Product Name</th>
 
                 <th>Quantity</th>
@@ -42,7 +41,7 @@
             @foreach (var cartProduct in Model.CartProducts)
             {
                 <tr>
-                    <td> <input type="checkbox" asp-for = "SelectedCartProductIds" /></td>
+                    
                     <td>@cartProduct.Product.ProductName</td>
                     <td>@cartProduct.Quantity</td>
                     <td>@cartProduct.Product.ProductPrice</td> 
@@ -71,9 +70,20 @@ else
     <p>Your cart is empty.</p>
 }
 
-<form method="post"> 
-    
-    <input type = "submit" value=" Place an Order"/> 
+<form method="post" asp-page-handler="Checkout">
+
+    <label for="shoeSize">Choose your shoe size:</label>
+    <select id="shoeSize" name="ProductShoeSize" required>
+        <option value="">Select Size</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+    </select>
 
 
+    <input type = "submit" value="Go to checkout" /> 
 </form>

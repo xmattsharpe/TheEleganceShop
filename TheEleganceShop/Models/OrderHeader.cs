@@ -4,7 +4,7 @@ namespace TheEleganceShop.Models
 {
     public class OrderHeader
     {
-
+        [Display(Name = "Order Number")]
         public int OrderHeaderId { get; set; }
         [Display(Name = "Order Date")]
         public DateTime OrderDate { get; set; }
@@ -17,6 +17,9 @@ namespace TheEleganceShop.Models
         public string? OrderPaymentMethod { get; set; }
         [Display(Name = "Shipping Address")]
 
+   
+        public string? OrderPaymentCard { get; set; }
+        [Display(Name = "Shipping Address")]
         public string? OrderShippingAddress { get; set; }
         [Display(Name = "City")]
 
@@ -25,9 +28,13 @@ namespace TheEleganceShop.Models
         public string? OrderZipCode { get; set; }
 
 
-        // Foreign key to Customer
+        
         public int? CustomerId { get; set; }
         public Customer? Customer { get; set; }
+
+
+        // Reference to the signed-in user
+        public string? UserId { get; set; }  
 
 
         // List to serve as a navigation property to the OrderDetails junction model

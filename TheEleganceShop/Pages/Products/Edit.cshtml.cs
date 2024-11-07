@@ -13,7 +13,7 @@ using TheEleganceShop.Models;
 namespace TheEleganceShop.Pages.Products
 {
 
-    
+    [Authorize(Roles = "Employee")]
     public class EditModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;

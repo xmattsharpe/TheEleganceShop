@@ -1,4 +1,5 @@
-﻿namespace TheEleganceShop.Models
+﻿using System.ComponentModel.DataAnnotations;
+namespace TheEleganceShop.Models
 {
     public class OrderDetail
     {
@@ -9,7 +10,11 @@
 
 
         // FK's to product and orderheader
+
+        
         public int? ProductID { get; set; }
+
+        [Display(Name = "Order Number")]
         public int? OrderHeaderID { get; set; }
 
         // Navigation properties to both models

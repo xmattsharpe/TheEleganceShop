@@ -22,11 +22,11 @@ namespace TheEleganceShop.Pages.Carts
 
         public Cart Cart { get; set; } = default!;
 
+        
+        public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
-        // list to hold the IDs that are checked with the checkbox
         [BindProperty]
-        public int[] SelectedCartProductIds { get; set; }
-        public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>(); 
+        public int? ProductShoeSize { get; set; }
 
 
 
@@ -69,21 +69,37 @@ namespace TheEleganceShop.Pages.Carts
             return RedirectToPage(); 
         }
 
-        public async Task<IActionResult> OnpostOrder()
+        public async Task<IActionResult> OnPostCheckout()
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // again Loading the user's cart along with its products
             Cart = await _context.Cart
                 .Include(c => c.CartProducts)
                     .ThenInclude(cp => cp.Product)
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
-            // If there is nothing in their cart, customer cannot advance to the order screen...
-            if (Cart == null || !SelectedCartProductIds.Any())
+            // Checking if the cart is empty
+            if (Cart == null || !Cart.CartProducts.Any())
             {
-                return RedirectToPage("/Index");
+                // Redirect to the cart page if it's empty
+                return RedirectToPage("/Carts/Index");
             }
 
-            return Page();
+            foreach (var cartProduct in Cart.CartProducts)
+            {
+                var orderDetail = new OrderDetail
+                {
+                    ProductID = cartProduct.ProductID,
+                    ProductQuantity = cartProduct.Quantity,
+
+                    ProductShoeSize = ProductShoeSize, 
+                };
+               
+            }
+
+            // Redirecting the Checkout page in OrderHeaders
+            return RedirectToPage("/OrderHeaders/Checkout");
         }
 
 

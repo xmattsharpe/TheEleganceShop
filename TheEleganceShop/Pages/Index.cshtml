@@ -24,7 +24,21 @@
     
 </style>
 
-<div class="text-center">
+<div style="text-align: right; color: white"> 
+@{
+
+    if (User.IsInRole("Employee"))
+    {
+        <h6> You are currently signed in as: Employee </h6>
+    }
+
+    else if (User.IsInRole("Customer"))
+    {
+        <h6> You are currently signed in as: Customer </h6>
+    }
+}
+</div>
+          <div class="text-center">
     <h1 class="display-4" style="color: white;">The Luxury Elegance Shop</h1>
     <hr />
 </div>
