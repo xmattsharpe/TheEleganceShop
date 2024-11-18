@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using TheEleganceShop.Models;
 
 namespace TheEleganceShop.Pages.OrderDetails
 {
+
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;
@@ -21,11 +24,22 @@ namespace TheEleganceShop.Pages.OrderDetails
 
         public IList<OrderDetail> OrderDetail { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task <IActionResult> OnGetAsync()
         {
+            // fetch current user id claim about logged in user 
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return RedirectToPage("/Index");
+            }
+
             OrderDetail = await _context.OrderDetail
                 .Include(o => o.OrderHeader)
-                .Include(o => o.Product).ToListAsync();
+                .Include(o => o.Product).Where(x => x.OrderHeader.UserId == userId).ToListAsync();
+
+            return Page();
         }
     }
 }
