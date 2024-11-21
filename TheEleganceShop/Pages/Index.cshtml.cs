@@ -19,10 +19,24 @@ namespace TheEleganceShop.Pages
         }
 
         public List<Product> SearchResults { get; set; }
-        public void OnGet()
+
+
+        public List<Product> AllProducts { get; set; }
+
+        public List<Product> Top { get; set; }
+        public List <Product> Bottom { get; set; }
+
+    
+        public async Task OnGetAsync()
         {
 
+            AllProducts = await _context.Product.ToListAsync();
+
+            Top = AllProducts.Where(x => x.ProductName.Contains("Nike") || x.ProductName.Contains("Jordan")).ToList();
+
+            Bottom = AllProducts.Where(y => y.ProductName.Contains("Yeezy")).ToList();
         }
+       
 
         public async Task<IActionResult> OnPostAsync(string search)
         {

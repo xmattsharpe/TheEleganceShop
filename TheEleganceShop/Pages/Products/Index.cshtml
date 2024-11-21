@@ -28,7 +28,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].ProductCategory)
             </th>
-            
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].ProductImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Product[0].ProductshoeSize)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -50,7 +55,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductCategory)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductshoeSize)
+            </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.ProductID">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.ProductID">Details</a> |

@@ -37,7 +37,7 @@
         </thead>
         <tbody>
 
-            <!-- display each instance of the product and its attributes -->
+            <!-- displaying each product annd all of their attributes to user  -->
             @foreach (var cartProduct in Model.CartProducts)
             {
                 <tr>
@@ -69,11 +69,12 @@ else
 {
     <p>Your cart is empty.</p>
 }
-
 <form method="post" asp-page-handler="Checkout">
 
     <label for="shoeSize">Choose your shoe size:</label>
-    <select id="shoeSize" name="ProductShoeSize" required>
+
+    <!-- Bind the selected value of ProductShoeSize to the model -->
+    <select id="shoeSize" asp-for="ProductShoeSize" class="form-control" required>
         <option value="">Select Size</option>
         <option value="6">6</option>
         <option value="7">7</option>
@@ -84,6 +85,5 @@ else
         <option value="12">12</option>
     </select>
 
-
-    <input type = "submit" value="Go to checkout" /> 
+    <input type="submit" value="Go to checkout" />
 </form>

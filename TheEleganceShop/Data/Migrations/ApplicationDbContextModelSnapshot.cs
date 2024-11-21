@@ -399,6 +399,9 @@ namespace TheEleganceShop.Data.Migrations
                     b.Property<int?>("ProductStockQuantity")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductshoeSize")
+                        .HasColumnType("int");
+
                     b.HasKey("ProductID");
 
                     b.ToTable("Product");

@@ -44,6 +44,11 @@
                 <span asp-validation-for="Product.ProductImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Product.ProductshoeSize" class="control-label"></label>
+                <input asp-for="Product.ProductshoeSize" class="form-control" />
+                <span asp-validation-for="Product.ProductshoeSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

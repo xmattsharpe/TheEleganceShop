@@ -95,7 +95,9 @@ namespace TheEleganceShop.Pages.Carts
 
                     ProductShoeSize = ProductShoeSize, 
                 };
-               
+
+                _context.OrderDetail.Add(orderDetail);
+
             }
 
             // Redirecting the Checkout page in OrderHeaders

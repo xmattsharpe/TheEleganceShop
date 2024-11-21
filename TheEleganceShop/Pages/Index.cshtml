@@ -76,90 +76,45 @@
 }
     <h2 id="headline">New and trendy</h2>
 
-    <div class="container">
-        <div class="row">
-
-           <!-- Main 4 products that I want user seeing -->
-            
-            <div class="col-md-3">
-                <img src="/img/Zebra1.jpg" class="img-fluid product-img" alt="Shoe1" />
-                <p class="text-center" style="color: white;">Zebra Yeezy Boost 350 V2</p>
-                <a asp-page="/Products/Details" asp-route-id="1" class="btn btn-secondary btn-block">View</a>
-            </div>
-
-            
-            <div class="col-md-3">
-                <img src="/img/J11.jpg" class="img-fluid product-img" alt="Shoe2" />
-                <p class="text-center" style="color: white;">Jordan 11 Concord</p>
-                <a asp-page="/Products/Details" asp-route-id="2" class="btn btn-secondary btn-block">View</a>
-            </div>
-
-          
-            <div class="col-md-3">
-                <img src="/img/j4.jpg" class="img-fluid product-img" alt="Shoe3" />
-                <p class="text-center" style="color: white;">Jordan 4 Lightning</p>
-                <a asp-page="/Products/Details" asp-route-id="3" class="btn btn-secondary btn-block">View</a>
-            </div>
-
-            <div class="col-md-3">
-                <img src="/img/cactus.jpg" class="img-fluid product-img" alt="Shoe4" />
-                <p class="text-center" style="color: white;">Nike Cactus Flee Plant</p>
-                <a asp-page="/Products/Details" asp-route-id="4" class="btn btn-secondary btn-block">View</a>
-            </div>
-        </div>
-    </div>
-
-
-<hr style = "color: red"> 
-
-<h2 id="headline">Our Most Popular Yeezy's</h2>
 <div class="container">
     <div class="row">
-        
-        <div class="col-md-2">
-            <img src="/img/onyx1.jpg" class="img-fluid product-img" alt="ONYX" />
-            <p class="text-center" style="color: white;">Yeezy Slide Onyx</p>
-            <a asp-page="/Products/Details" asp-route-id="5" class="btn btn-secondary btn-block ">View</a>
-        </div>
-
-        
-        <div class="col-md-2">
-            <img src="/img/FoamSlide.jpeg" class="img-fluid product-img" alt="Foam Slides" />
-            <p class="text-center" style="color: white;"> Yeezy Foam Runner 'Slate'</p>
-            <a asp-page="/Products/Details" asp-route-id="7" class="btn btn-secondary btn-block">View</a>
-        </div>
-
-        
-        <div class="col-md-2">
-            <img src="/img/Boost.jpg" class="img-fluid product-img" alt="Magnet" />
-            <p class="text-center" style="color: white;">Yeezy Boost 700 'Magnet'</p>
-            <a asp-page="/Products/Details" asp-route-id="8" class="btn btn-secondary btn-block">View</a>
-        </div>
-
-        
-        <div class="col-md-2">
-            <img src="/img/Yeezy500.jpg" class="img-fluid product-img" alt="BLUSH" />
-            <p class="text-center" style="color: white;">Yeezy Boost5 500 'Blush'</p>
-            <a asp-page="/Products/Details" asp-route-id="9" class="btn btn-secondary btn-block">View</a>
-        </div>
-
-        
-        <div class="col-md-2">
-            <img src="/img/Pirates.jpg" class="img-fluid product-img" alt="Pirates" />
-            <p class="text-center" style="color: white;">Yeezy Boost 350 'Pirate Black'</p>
-            <a asp-page="/Products/Details" asp-route-id="10" class="btn btn-secondary btn-block">View</a>
-        </div>
-
-        
-        <div class="col-md-2">
-            <img src="/img/InsulatedBoot.jpg" class="img-fluid product-img" alt="Boots" />
-            <p class="text-center" style="color: white;">Yeezy Insulated Boots</p>
-            <a asp-page="/Products/Details" asp-route-id="11" class="btn btn-secondary btn-block">View</a>
-        </div>
-
-        
-        
+        @if (Model.Top != null && Model.Top.Any())
+        {
+            @foreach (var product in Model.Top)
+            {
+                <div class="col-md-3">
+                    <img src="@product.ProductImageUrl" class="img-fluid product-img" alt="@product.ProductName" />
+                    <p class="text-center" style="color: white;">@product.ProductName</p>
+                    <a asp-page="/Products/Details" asp-route-id="@product.ProductID" class="btn btn-secondary btn-block">View</a>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="color: white;">No top products available at the moment.</p>
+        }
     </div>
+</div>
 
+<hr style="color: red">
 
+<h2 id="headline"> Our Most Popular Yeezy's </h2>
+<div class="container">
+    <div class="row">
+        @if (Model.Bottom != null && Model.Bottom.Any())
+        {
+            @foreach (var product in Model.Bottom)
+            {
+                <div class="col-md-3">
+                    <img src="@product.ProductImageUrl" class="img-fluid product-img" alt="@product.ProductName" />
+                    <p class="text-center" style="color: white;">@product.ProductName</p>
+                    <a asp-page="/Products/Details" asp-route-id="@product.ProductID" class="btn btn-secondary btn-block">View</a>
+                </div>
+            }
+        }
+        else
+        {
+            <p style="color: white;">No bottom products available at the moment.</p>
+        }
+    </div>
 </div>

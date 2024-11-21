@@ -25,6 +25,7 @@ namespace TheEleganceShop.Models
         [Display(Name = "Image")]
         public string? ProductImageUrl { get; set; }
 
+        public int? ProductshoeSize { get; set; }
 
         // List to serve as a navigation property to the OrderDetails junction model
         public List <OrderDetail>? OrderDetails { get; set; }
