@@ -71,19 +71,6 @@ else
 }
 <form method="post" asp-page-handler="Checkout">
 
-    <label for="shoeSize">Choose your shoe size:</label>
-
-    <!-- Bind the selected value of ProductShoeSize to the model -->
-    <select id="shoeSize" asp-for="ProductShoeSize" class="form-control" required>
-        <option value="">Select Size</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-    </select>
-
+ 
     <input type="submit" value="Go to checkout" />
 </form>

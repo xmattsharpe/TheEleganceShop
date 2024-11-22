@@ -1,5 +1,7 @@
 ﻿using TheEleganceShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Identity.Client;
 
 namespace TheEleganceShop.Data
 {
@@ -10,7 +12,7 @@ namespace TheEleganceShop.Data
             // Checking   if any products already exist 
             if (context.Product.Any())
             {
-                return;   
+                return;
             }
 
             // Seeding my products data if not already present
@@ -26,6 +28,7 @@ namespace TheEleganceShop.Data
                     ProductImageUrl = "/img/zebra1.jpg",
                     ProductshoeSize = 10
                 },
+
                 new Product
                 {
                     ProductName = "Jordan 11 Concord",
@@ -33,6 +36,7 @@ namespace TheEleganceShop.Data
                     ProductPrice = 400.00m,
                     ProductStockQuantity = 2,
                     ProductCategory = "Mens",
+
                     ProductImageUrl = "/img/J11.jpg",
                     ProductshoeSize = 8
                 },
@@ -51,6 +55,7 @@ namespace TheEleganceShop.Data
                     ProductName = "Nike Cactus Flee Plant",
                     ProductDescription = "The Nike Cactus Plant Flea Market (CPFM) 'Overgrown' is a unique sneaker collaboration that features an innovative design blending streetwear aesthetics with playful elements. The shoe showcases an oversized silhouette with a vibrant mix of colors and textures, often including fuzzy materials and bold graphic details.",
                     ProductPrice = 300.00m,
+
                     ProductStockQuantity = 7,
                     ProductCategory = "Womens",
                     ProductImageUrl = "/img/cactus.jpg",
@@ -69,7 +74,7 @@ namespace TheEleganceShop.Data
                 new Product
                 {
                     ProductName = "Yeezy Foam Runner 'Slate'",
-                    ProductDescription = "The Yeezy Foam Runner 'Slate' brings together innovative design and sustainable materials for a unique, eye-catching sneaker experience. Made from a blend of harvested algae and EVA foam, the 'Slate' colorway has a sleek and neutral look that pairs with almost any style. With its ergonomic slip-on structure, the Foam Runner combines comfort with breathability, thanks to strategically placed cutouts that offer ventilation and a striking aesthetic.",
+                    ProductDescription = " The Yeezy Foam Runner  'Slate' brings together innovative design and sustainable materials for a unique, eye-catching sneaker experience. Made from a blend of harvested algae and EVA foam, the 'Slate' colorway has a sleek and neutral look that pairs with almost any style. With its ergonomic slip-on structure, the Foam Runner combines comfort with breathability, thanks to strategically placed cutouts that offer ventilation and a striking aesthetic.",
                     ProductPrice = 220.00m,
                     ProductStockQuantity = 2,
                     ProductCategory = "Unisex",
@@ -82,7 +87,7 @@ namespace TheEleganceShop.Data
                     ProductDescription = "The Yeezy Boost 700 'Magnet' delivers a sophisticated blend of earthy tones with the comfort and style that have made the 700 series a fan favorite. This sneaker showcases a rich mix of suede, mesh, and leather in muted grey, cream, and dark grey tones, creating a layered and textured look. The chunky midsole features Adidas’ signature Boost cushioning for optimal support and comfort.",
                     ProductPrice = 300.00m,
                     ProductStockQuantity = 1,
-                    ProductCategory = "Mens",
+                     ProductCategory = "Mens",
                     ProductImageUrl = "/img/Boost.jpg",
                     ProductshoeSize = 11
                 },
@@ -97,6 +102,7 @@ namespace TheEleganceShop.Data
                     ProductshoeSize = 8
                 },
                 new Product
+
                 {
                     ProductName = "Yeezy Boost 350 'Pirate Black'",
                     ProductDescription = "Yeezy Boost 350 'Pirate Black' is an iconic sneaker known for its sleek, versatile style and superior comfort. It features a stealthy, all-black Primeknit upper with subtle dark grey detailing, creating a textured look that's minimal yet eye-catching.",
@@ -124,13 +130,71 @@ namespace TheEleganceShop.Data
                     ProductStockQuantity = 3,
                     ProductCategory = "Unisex",
                     ProductImageUrl = "/img/pandass.jpg",
-                    ProductshoeSize = 0 // No size for these
+                    ProductshoeSize = 4
                 }
             };
 
-            // Add the products to the database context and save changes
+
             context.Product.AddRange(products);
             context.SaveChanges();
+
+
+            // Seed  data for roles and Users
+
+            if (!context.Roles.Any())
+            {
+                var AdminRole = new IdentityRole("Admin");
+                var customerRole = new IdentityRole("Customer");
+
+                context.Roles.AddRange(AdminRole, customerRole);
+                context.SaveChanges();
+
+
+                var user = new IdentityUser
+                {
+                    UserName = "matthewsharpe@TES.com",
+                    Email = "matthewsharpe@TES.com",
+                    NormalizedUserName = "matthewsharpe@TES.com",
+                    // Its upper cased in the asp.net table by default so I assume it should be....
+                    NormalizedEmail = "matthewsharpe@TES.com".ToUpper(),
+                    EmailConfirmed = true
+                };
+
+                context.Users.Add(user);
+                context.SaveChanges();
+
+
+                // ADD ADMIN TO USER
+
+                var userRole = new IdentityUserRole<string>
+                {
+                    UserId = user.Id,
+                    RoleId = AdminRole.Id
+                };
+
+                context.UserRoles.Add(userRole);
+                context.SaveChanges();
+
+                // AGAIN FOR CUSTOMER
+
+
+                var Customer = new IdentityUser
+                {
+                    UserName = "example123@example.com",
+                    Email = "example123@example.com",
+                    NormalizedUserName = "example123@example.com",
+                    NormalizedEmail = "example123@example.com".ToUpper(),
+                    EmailConfirmed = true
+                };
+
+                var Customerassign = new IdentityUserRole<string>
+                {
+                    UserId = Customer.Id,
+                    RoleId = customerRole.Id
+                    
+                };
+
+            }
         }
     }
 }

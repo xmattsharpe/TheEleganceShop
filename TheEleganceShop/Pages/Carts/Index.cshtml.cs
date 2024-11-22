@@ -25,8 +25,7 @@ namespace TheEleganceShop.Pages.Carts
         
         public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
-        [BindProperty]
-        public int? ProductShoeSize { get; set; }
+        
 
 
 
@@ -93,7 +92,7 @@ namespace TheEleganceShop.Pages.Carts
                     ProductID = cartProduct.ProductID,
                     ProductQuantity = cartProduct.Quantity,
 
-                    ProductShoeSize = ProductShoeSize, 
+                    
                 };
 
                 _context.OrderDetail.Add(orderDetail);

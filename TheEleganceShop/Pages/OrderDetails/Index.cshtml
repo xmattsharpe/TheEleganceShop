@@ -14,7 +14,7 @@
     }
 </style>
 
-<h1> Your Orders </h1>
+<h1> Your Ordered Items  </h1>
 
 
 <table class="table">
@@ -23,9 +23,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].ProductQuantity)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderDetail[0].ProductShoeSize)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.OrderDetail[0].OrderHeader)
             </th>
@@ -41,9 +39,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ProductQuantity)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductShoeSize)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.OrderHeader.OrderHeaderId)
             </td>

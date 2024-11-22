@@ -28,7 +28,7 @@ namespace TheEleganceShop.Pages.OrderDetails
                 return NotFound();
             }
 
-            var orderdetail = await _context.OrderDetail.FirstOrDefaultAsync(m => m.OrderDetailID == id);
+            var orderdetail = await _context.OrderDetail.Include(oh => oh.OrderHeader).FirstOrDefaultAsync(m => m.OrderDetailID == id);
             if (orderdetail == null)
             {
                 return NotFound();

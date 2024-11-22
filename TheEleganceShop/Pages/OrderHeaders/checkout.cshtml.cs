@@ -20,11 +20,11 @@ namespace TheEleganceShop.Pages.OrderHeaders
             _context = context;
         }
 
-        // The OrderHeader instance for capturing user input like shipping info
+        
         [BindProperty]
         public OrderHeader OrderHeader { get; set; } = new OrderHeader(); 
 
-        // Property to hold CartProducts for display
+        // Property to hold CartProducts for display 
         public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
         
@@ -41,7 +41,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
-            // Load the Cart and related CartProducts for the logged-in user
+            // Loading the users Cart and related Cart Products 
             var cart = await _context.Cart
                 .Include(c => c.CartProducts)
                     .ThenInclude(cp => cp.Product)
@@ -52,11 +52,11 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
-            // Assign CartProducts and calculate the total
+            
             CartProducts = cart.CartProducts;
             TotalAmount = CartProducts.Sum(cp => cp.Quantity * cp.Product.ProductPrice ?? 0);
 
-            // Initialize Order total amount
+           
             OrderHeader.OrderAmount = TotalAmount;
 
             return Page();
@@ -71,7 +71,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
-            // Fetch the cart for the current user
+            // Fetching the cart for the currentlu signed in user
             var cart = await _context.Cart
                 .Include(c => c.CartProducts)
                     .ThenInclude(cp => cp.Product)
@@ -83,28 +83,32 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return Page();
             }
 
-            // Populate OrderHeader with details and save it
+            // Populating myy fields from the orderheader model. 
             OrderHeader.UserId = userId;
-            OrderHeader.OrderDate = DateTime.UtcNow;
-            OrderHeader.OrderStatus = "Placed"; // Example status
+            OrderHeader.OrderDate = DateTime.Now;
+            OrderHeader.OrderStatus = "Placed"; 
+
+            // found the ?? notation below on stack overflow
+            // I am using it to check if productprice property is null if so, assign 0
             OrderHeader.OrderAmount = cart.CartProducts.Sum(cp => cp.Quantity * cp.Product.ProductPrice ?? 0);
 
             _context.OrderHeader.Add(OrderHeader);
             await _context.SaveChangesAsync();
 
-            // Create OrderDetails for each CartProduct
-            var orderDetails = cart.CartProducts.Select(cp => new OrderDetail
+            // Creating a OrderDetail instance for each CartProduct
+            var orderDetails = cart.CartProducts.Select(cp =>   new OrderDetail
             {
-                OrderHeaderID = OrderHeader.OrderHeaderId, // Use the saved OrderHeader ID
+                OrderHeaderID = OrderHeader.OrderHeaderId, 
                 ProductID = cp.ProductID,
                 ProductQuantity = cp.Quantity,
-                ProductShoeSize = null // Assign if applicable
+                ProductShoeSize = null 
             });
 
             _context.OrderDetail.AddRange(orderDetails);
             await _context.SaveChangesAsync();
 
-            // Optionally clear the cart
+            // Clearing entire cart after order is placed to restart
+
             _context.CartProduct.RemoveRange(cart.CartProducts);
             await _context.SaveChangesAsync();
 
@@ -120,13 +124,14 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
-            // Load the user's order in progress, or create a new one if necessary
+            // Loading the user's order in progress, or create a new one if necessary
             var orderHeader = await _context.OrderHeader
                 .FirstOrDefaultAsync(o => o.UserId == userId && o.OrderStatus == "Pending");
 
             if (orderHeader == null)
             {
-                // Initialize a new order if it doesn’t exist
+                // I create a new order if it does not exist
+                // default status pending until order is successfully placed
                 orderHeader = new OrderHeader
                 {
                     UserId = userId,
@@ -138,14 +143,14 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 await _context.SaveChangesAsync();
             }
 
-            // Update order with payment details from the form
+            // Updating my model attributes with the user entered data from the form
             orderHeader.OrderPaymentMethod = OrderHeader.OrderPaymentMethod;
             orderHeader.OrderPaymentCard = OrderHeader.OrderPaymentCard;
 
-            // Save the changes to the order
+           
             await _context.SaveChangesAsync();
 
-            // Redirect to another page (e.g., confirmation) or reload this page to show success message
+            
             return RedirectToPage("/OrderDetails/Index");
         }
     }
