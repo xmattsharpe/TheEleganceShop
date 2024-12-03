@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Identity.Client;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TheEleganceShop.Data
 {
@@ -131,12 +132,27 @@ namespace TheEleganceShop.Data
                     ProductCategory = "Unisex",
                     ProductImageUrl = "/img/pandass.jpg",
                     ProductshoeSize = 4
+                },
+
+                new Product
+                {
+                    ProductName = "Yeezy Mysteries?",
+                    ProductDescription = "You could win a pair of sneakers that have a face value up to $10,000, or as low as $50. Are you willing to take a risk?",
+                    ProductPrice = 500.00m,
+                    ProductStockQuantity = 1,
+                    ProductCategory = "Unisex",
+                    ProductImageUrl = "/img/questionMark.jpg",
+                    ProductshoeSize = 10
                 }
             };
 
 
             context.Product.AddRange(products);
             context.SaveChanges();
+
+
+
+
 
 
             // Seed  data for roles and Users
@@ -150,6 +166,11 @@ namespace TheEleganceShop.Data
                 context.SaveChanges();
 
 
+
+
+
+
+
                 var user = new IdentityUser
                 {
                     UserName = "matthewsharpe@TES.com",
@@ -159,23 +180,6 @@ namespace TheEleganceShop.Data
                     NormalizedEmail = "matthewsharpe@TES.com".ToUpper(),
                     EmailConfirmed = true
                 };
-
-                context.Users.Add(user);
-                context.SaveChanges();
-
-
-                // ADD ADMIN TO USER
-
-                var userRole = new IdentityUserRole<string>
-                {
-                    UserId = user.Id,
-                    RoleId = AdminRole.Id
-                };
-
-                context.UserRoles.Add(userRole);
-                context.SaveChanges();
-
-                // AGAIN FOR CUSTOMER
 
 
                 var Customer = new IdentityUser
@@ -187,12 +191,50 @@ namespace TheEleganceShop.Data
                     EmailConfirmed = true
                 };
 
+              
+
+                
+
+                // user
+                var PHasher = new PasswordHasher<IdentityUser>();
+                user.PasswordHash = PHasher.HashPassword(user, "MSHARPE");
+                user.SecurityStamp = Guid.NewGuid().ToString();
+
+                // customer
+
+                var PHasher1 = new PasswordHasher<IdentityUser>();
+                Customer.PasswordHash = PHasher1.HashPassword(Customer, "MSHARPE");
+                Customer.SecurityStamp = Guid.NewGuid().ToString();
+
+
+                context.Users.AddRange(user, Customer);
+                context.SaveChanges();
+
+
+                // ADD ADMIN TO USER
+
+                var userRole = new IdentityUserRole<string>
+                {
+                    UserId = user.Id,
+                    RoleId = AdminRole.Id
+                };
+
+                
+
+
+                // AGAIN FOR CUSTOMER
+
                 var Customerassign = new IdentityUserRole<string>
                 {
                     UserId = Customer.Id,
                     RoleId = customerRole.Id
-                    
+
                 };
+
+                context.UserRoles.AddRange(userRole, Customerassign);
+                context.SaveChanges();
+
+
 
             }
         }

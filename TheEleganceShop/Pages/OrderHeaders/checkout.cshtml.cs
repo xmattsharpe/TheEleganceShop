@@ -24,7 +24,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
         [BindProperty]
         public OrderHeader OrderHeader { get; set; } = new OrderHeader(); 
 
-        // Property to hold CartProducts for display 
+        // Property to hold CartProducts for display OF CSHMTL 
         public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
         
@@ -33,7 +33,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
         public async Task<IActionResult> OnGetAsync()
         {
 
-            // Grabbing the signed in users ID, if not found redirect to Home
+            // Grabbing the signed in users ID, if not found redirect to Home (This fetch a claim method I found via Stack Overflow)
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(userId))
@@ -41,6 +41,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
+            // Must go "through" cartproducts to access the products in the include
             // Loading the users Cart and related Cart Products 
             var cart = await _context.Cart
                 .Include(c => c.CartProducts)
@@ -54,6 +55,8 @@ namespace TheEleganceShop.Pages.OrderHeaders
 
             
             CartProducts = cart.CartProducts;
+
+            // if price is null I am using 0 because when null an exception is raised
             TotalAmount = CartProducts.Sum(cp => cp.Quantity * cp.Product.ProductPrice ?? 0);
 
            
@@ -79,7 +82,8 @@ namespace TheEleganceShop.Pages.OrderHeaders
 
             if (cart == null || !cart.CartProducts.Any())
             {
-                ModelState.AddModelError(string.Empty, "Your cart is empty.");
+                // custom message for the user if the cart is null
+                ModelState.AddModelError(string.Empty, "Your cart is empty. PLEASE BUY SOMETHING :) ");
                 return Page();
             }
 
@@ -88,14 +92,13 @@ namespace TheEleganceShop.Pages.OrderHeaders
             OrderHeader.OrderDate = DateTime.Now;
             OrderHeader.OrderStatus = "Placed"; 
 
-            // found the ?? notation below on stack overflow
-            // I am using it to check if productprice property is null if so, assign 0
+            
             OrderHeader.OrderAmount = cart.CartProducts.Sum(cp => cp.Quantity * cp.Product.ProductPrice ?? 0);
 
             _context.OrderHeader.Add(OrderHeader);
             await _context.SaveChangesAsync();
 
-            // Creating a OrderDetail instance for each CartProduct
+            // creating a OrderDetail object for each cart product
             var orderDetails = cart.CartProducts.Select(cp =>   new OrderDetail
             {
                 OrderHeaderID = OrderHeader.OrderHeaderId, 
@@ -107,8 +110,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
             _context.OrderDetail.AddRange(orderDetails);
             await _context.SaveChangesAsync();
 
-            // Clearing entire cart after order is placed to restart
-
+          // remove all products from the cart after the order is placed I assume is the most accurate thing to do
             _context.CartProduct.RemoveRange(cart.CartProducts);
             await _context.SaveChangesAsync();
 
@@ -136,7 +138,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 {
                     UserId = userId,
                     OrderStatus = "Pending",
-                    OrderDate = DateTime.UtcNow
+                    OrderDate = DateTime.Now
                 };
 
                 _context.OrderHeader.Add(orderHeader);

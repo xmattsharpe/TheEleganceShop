@@ -2,7 +2,7 @@
 @model TheEleganceShop.Pages.Products.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Product Information";
 }
 
 <style>
@@ -14,7 +14,7 @@
     }
 </style>
 
-<h1>Details</h1>
+<h1>Product Information  </h1>
 
 <div>
     <h4>@Model.Product.ProductName</h4>
@@ -71,7 +71,7 @@
 
 <div>
 
-    @if (User.IsInRole("Employee"))
+    @if (User.IsInRole("Admin"))
     {
         <a asp-page="./Edit" asp-route-id="@Model.Product.ProductID">Edit</a>
 

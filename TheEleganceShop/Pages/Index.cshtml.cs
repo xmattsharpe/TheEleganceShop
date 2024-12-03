@@ -29,7 +29,7 @@ namespace TheEleganceShop.Pages
     
         public async Task OnGetAsync()
         {
-
+            // SEPARATE THE FETCHED PRODUCTS INTO TWO GROUS FOR DISPLAY PURPOSES WITH THE .CSHTML
             AllProducts = await _context.Product.ToListAsync();
 
             Top = AllProducts.Where(x => x.ProductName.Contains("Nike") || x.ProductName.Contains("Jordan")).ToList();

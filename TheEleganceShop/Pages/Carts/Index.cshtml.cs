@@ -25,12 +25,13 @@ namespace TheEleganceShop.Pages.Carts
         
         public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
-        
 
 
 
         public async Task OnGetAsync()
         {
+
+            // this fetch of asp . net user claim came from stack overflow
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
             if (!string.IsNullOrEmpty(userId))
@@ -42,7 +43,7 @@ namespace TheEleganceShop.Pages.Carts
                     .FirstOrDefaultAsync(c => c.UserId == userId); 
 
                 
-                // If the user has a cart, the products in their cart are still assigned to cartproducts.
+                // If the Cart.cartproducts is NULL, ASSIGN EMPTY LIST TO cartproducts
                 if (Cart != null)
                 {
                     CartProducts = Cart.CartProducts ?? new List<CartProduct>(); 
@@ -87,6 +88,7 @@ namespace TheEleganceShop.Pages.Carts
 
             foreach (var cartProduct in Cart.CartProducts)
             {
+                // create orderdetail for each cartperoduct
                 var orderDetail = new OrderDetail
                 {
                     ProductID = cartProduct.ProductID,
@@ -99,7 +101,7 @@ namespace TheEleganceShop.Pages.Carts
 
             }
 
-            // Redirecting the Checkout page in OrderHeaders
+            
             return RedirectToPage("/OrderHeaders/Checkout");
         }
 

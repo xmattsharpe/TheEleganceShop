@@ -24,12 +24,16 @@
     
 </style>
 
+
+
 <div style="text-align: right; color: white"> 
 @{
+    // Admin means employee for the site.... 
 
-    if (User.IsInRole("Employee"))
+    if (User.IsInRole("Admin"))
     {
-        <h6> You are currently signed in as: Employee </h6>
+        <h6> You are currently signed in as: Admin </h6>
+
     }
 
     else if (User.IsInRole("Customer"))
@@ -98,7 +102,7 @@
 
 <hr style="color: red">
 
-<h2 id="headline"> Our Most Popular Yeezy's </h2>
+<h2 id="headline" > Our Most Popular Yeezy's </h2>
 <div class="container">
     <div class="row">
         @if (Model.Bottom != null && Model.Bottom.Any())

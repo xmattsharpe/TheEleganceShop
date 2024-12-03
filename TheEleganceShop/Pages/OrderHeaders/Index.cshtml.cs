@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,7 @@ using TheEleganceShop.Models;
 
 namespace TheEleganceShop.Pages.OrderHeaders
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;
@@ -23,8 +26,13 @@ namespace TheEleganceShop.Pages.OrderHeaders
 
         public async Task OnGetAsync()
         {
+            
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+            // only the order headers created from logged in user to be show
             OrderHeader = await _context.OrderHeader
-                .Include(o => o.Customer).ToListAsync();
+                    .Include(o => o.Customer)
+                .Where(x => x.UserId == userId).ToListAsync();
         }
     }
 }

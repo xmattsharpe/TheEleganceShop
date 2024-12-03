@@ -27,6 +27,7 @@ namespace TheEleganceShop.Pages.OrderDetails
         public async Task <IActionResult> OnGetAsync()
         {
             // fetch current user id claim about logged in user 
+            // SO
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
 
@@ -34,7 +35,8 @@ namespace TheEleganceShop.Pages.OrderDetails
             {
                 return RedirectToPage("/Index");
             }
-
+              
+            // oNLY SHOW the relevant order details for the currently logged in user
             OrderDetail = await _context.OrderDetail
                 .Include(o => o.OrderHeader)
                 .Include(o => o.Product).Where(x => x.OrderHeader.UserId == userId).ToListAsync();

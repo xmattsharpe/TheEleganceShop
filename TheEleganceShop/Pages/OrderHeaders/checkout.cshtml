@@ -24,13 +24,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Product</th>
+               <th>Product</th>
                 <th>Quantity</th>
                 <th>Price</th>
                 <th>Total</th>
             </tr>
         </thead>
         <tbody>
+
+
             @foreach (var cartProduct in Model.CartProducts)
             {
                 <tr>
@@ -49,6 +51,9 @@ else
     <p>Your cart is empty.</p>
 }
 
+<!-- at one point I had a field for shoe size in this form but I couldnt get it to show up on the order details when it was selected, I misplaced it initially in the wrong model
+    and I am trying to minimize the # of ttimes that I have to rescaffold or update the DB
+-->
 <h2> Payment & Shipping Details </h2>
 <form method="post">
 
@@ -82,6 +87,7 @@ else
     </div>
 
     <button type="submit" class="btn btn-primary">Place Order</button>
+
 
 
 

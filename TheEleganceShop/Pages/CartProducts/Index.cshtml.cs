@@ -10,9 +10,11 @@ using TheEleganceShop.Data;
 using TheEleganceShop.Models;
 
 
+// this model / .cs is only a junction model, its not really meant to be accessed by any user but ill restrict it to admin (employee)...
+
 namespace TheEleganceShop.Pages.CartProducts
 {
-    [Authorize(Roles = "Employee")]
+    [Authorize(Roles = "Admin")]
 
     public class IndexModel : PageModel
     {
