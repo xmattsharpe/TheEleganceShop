@@ -25,7 +25,8 @@ namespace TheEleganceShop.Pages.Carts
         
         public IList<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 
-
+        // I actually recently found this way to fetch the logged in user (var currentUserName = User.Identity.Name)
+        // but I prefer to not risk breaking it by changing the FindFirst method that I have.
 
 
         public async Task OnGetAsync()

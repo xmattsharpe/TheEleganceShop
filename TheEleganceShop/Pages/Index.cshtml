@@ -21,10 +21,43 @@
         background-color: black;
     }
 
+    #customize{
+            width: 40%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 8px;
+            transform-style: preserve-3d;
+            margin-left: 400px;
+            background-color: black;
     
+
+    }
+
+
+
+
 </style>
 
+<!--  -->
+<script>
+    
+    function snagimg() {
 
+        var img = document.getElementById("customize");
+        var swaggymattt = document.getElementById("swaggymattt");
+
+        
+        setInterval(function() {
+            myimg(img, swaggymattt.value);
+        }, 100);
+    }
+
+   
+    function myimg(img, value) {
+   
+        img.style.transform = 'rotate(' + value + 'deg)';
+    }
+</script>
 
 <div style="text-align: right; color: white"> 
 @{
@@ -42,7 +75,12 @@
     }
 }
 </div>
-          <div class="text-center">
+
+
+
+
+
+ <div class="text-center">
     <h1 class="display-4" style="color: white;">The Luxury Elegance Shop</h1>
     <hr />
 </div>
@@ -122,3 +160,14 @@
         }
     </div>
 </div>
+
+
+@if(Model.Logo != null && Model.Logo.Any()){
+    
+    foreach(var item in Model.Logo){
+                <img src = "@item.ProductImageUrl" class = "img-fluid product-img" alt="@item.ProductName"  id = "customize"/> 
+                        <input type="range" value="1" min="1" max="360" id="swaggymattt" oninput="snagimg()"/> 
+    }
+}
+
+            

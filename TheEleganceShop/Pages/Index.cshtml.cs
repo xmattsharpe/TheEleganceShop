@@ -26,6 +26,10 @@ namespace TheEleganceShop.Pages
         public List<Product> Top { get; set; }
         public List <Product> Bottom { get; set; }
 
+        public List <Product> Logo { get; set; }
+
+    
+
     
         public async Task OnGetAsync()
         {
@@ -35,6 +39,9 @@ namespace TheEleganceShop.Pages
             Top = AllProducts.Where(x => x.ProductName.Contains("Nike") || x.ProductName.Contains("Jordan")).ToList();
 
             Bottom = AllProducts.Where(y => y.ProductName.Contains("Yeezy")).ToList();
+
+            Logo = AllProducts.Where(swaggymatt => swaggymatt.ProductName.Contains("SpecialLogo")).ToList();
+
         }
        
 

@@ -41,6 +41,7 @@ namespace TheEleganceShop.Pages.OrderHeaders
                 return RedirectToPage("/Index");
             }
 
+           
             // Must go "through" cartproducts to access the products in the include
             // Loading the users Cart and related Cart Products 
             var cart = await _context.Cart
