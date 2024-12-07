@@ -56,13 +56,15 @@ namespace TheEleganceShop.Pages.Products
             // Searching for the users cart, return only 1 cart with first or default 
             var cart = await _context.Cart
                 .Include(c => c.CartProducts)
-                // match condition.
+                // match condition for my user.
                 .FirstOrDefaultAsync(c => c.UserId == userId);
 
             // adding the cart if it did not exist // cart object
             if (cart == null)
             {
-                cart = new Cart { UserId = userId };
+                cart = new Cart {
+                    UserId = userId };
+
                 _context.Cart.Add(cart);
                 await _context.SaveChangesAsync();
             }
@@ -80,6 +82,7 @@ namespace TheEleganceShop.Pages.Products
                 ProductID = product.ProductID,
                 CartID = cart.CartID,
                 Quantity = 1
+                // ... come back to
 
             };
 

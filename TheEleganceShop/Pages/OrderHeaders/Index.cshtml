@@ -18,8 +18,16 @@
     }
 </style>
 
+@if (User.IsInRole("Admin"))
+{
+    <h1> All Customer Orders </h1>
+}
 
-<h1>Your Order Headers</h1>
+else
+{
+    <h1>Your Order Headers</h1>
+}
+
 
 
 <table class="table">

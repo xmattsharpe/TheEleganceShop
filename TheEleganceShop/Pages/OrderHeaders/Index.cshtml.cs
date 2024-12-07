@@ -29,10 +29,24 @@ namespace TheEleganceShop.Pages.OrderHeaders
             
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 
-            // only the order headers created from logged in user to be show
-            OrderHeader = await _context.OrderHeader
+            // only admin can see all user order
+
+            if (User.IsInRole("Admin"))
+            {
+                OrderHeader = await _context.OrderHeader
                     .Include(o => o.Customer)
-                .Where(x => x.UserId == userId).ToListAsync();
+                .ToListAsync();
+
+            }
+
+
+            else
+            {
+                // only the order headers created from logged in user to be show
+                OrderHeader = await _context.OrderHeader
+                        .Include(o => o.Customer)
+                    .Where(x => x.UserId == userId).ToListAsync();
+            }
         }
     }
 }
