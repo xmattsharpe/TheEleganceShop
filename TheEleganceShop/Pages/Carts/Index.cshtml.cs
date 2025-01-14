@@ -85,6 +85,7 @@ namespace TheEleganceShop.Pages.Carts
             {
                 // Redirect to the cart page if it's empty
                 return RedirectToPage("/Carts/Index");
+
             }
 
             foreach (var cartProduct in Cart.CartProducts)
