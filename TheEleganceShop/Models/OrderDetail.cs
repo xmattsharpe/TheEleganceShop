@@ -17,9 +17,9 @@ namespace TheEleganceShop.Models
         [Display(Name = "Order Number")]
         public int? OrderHeaderID { get; set; }
 
-        // Navigation properties to both models
+        
         public OrderHeader? OrderHeader { get; set; }
-        // Navigation property to the Product
+  
         public Product? Product { get; set; }
 
     }

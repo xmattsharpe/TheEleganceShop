@@ -49,7 +49,7 @@
         
         setInterval(function() {
             myimg(img, swaggymattt.value);
-        },  100);
+        }, 100);
     }
 
    
@@ -60,24 +60,24 @@
 </script>
 
 <div style="text-align: right; color: white"> 
+
 @{
     // Admin means employee for the site.... 
 
-    if (User.IsInRole("Admin"))
-    {
-        <h6> You are currently signed in as: Admin </h6>
-
-    }
-
-    else if (User.IsInRole("Customer"))
-    {
-        <h6> You are currently signed in as: Customer </h6>
-    }
+        if (User.IsInRole("Admin"))
+        {
+                <h6> You are currently signed in as: Admin </h6>
+        }
+        else if (User.Identity.IsAuthenticated || User.IsInRole("Customer"))
+        {
+                <h6> You are currently signed in as: Customer </h6>
+        }
+        else
+        {
+                <h6> You are currently not signed in. Please log in or create an account </h6>
+        }
 }
 </div>
-
-
-
 
 
  <div class="text-center">

@@ -33,6 +33,10 @@ namespace TheEleganceShop.Pages.OrderHeaders
         public async Task<IActionResult> OnGetAsync()
         {
 
+
+            // I did realize I could just use Users.Identity.Name but Id rather not replace this
+            // fetch every line in my app since its working
+
             // Grabbing the signed in users ID, if not found redirect to Home (This fetch a claim method I found via Stack Overflow)
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
 

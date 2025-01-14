@@ -11,7 +11,7 @@
 
         public string? UserId { get; set; }
 
-        // Navigation list to the junction table 
+        // 
         public List <CartProduct>? CartProducts { get; set; }
 
 

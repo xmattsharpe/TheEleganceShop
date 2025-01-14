@@ -35,11 +35,20 @@ namespace TheEleganceShop.Pages.OrderDetails
             {
                 return RedirectToPage("/Index");
             }
-              
-            // oNLY SHOW the relevant order details for the currently logged in user
-            OrderDetail = await _context.OrderDetail
+
+            if (User.IsInRole("Admin"))
+            {
+                OrderDetail = await _context.OrderDetail
                 .Include(o => o.OrderHeader)
-                .Include(o => o.Product).Where(x => x.OrderHeader.UserId == userId).ToListAsync();
+                .Include(o => o.Product).ToListAsync();
+            }
+            else
+            {
+                // oNLY SHOW the relevant order details for the currently logged in user
+                OrderDetail = await _context.OrderDetail
+                    .Include(o => o.OrderHeader)
+                    .Include(o => o.Product).Where(x => x.OrderHeader.UserId == userId).ToListAsync();
+            }
 
             return Page();
         }

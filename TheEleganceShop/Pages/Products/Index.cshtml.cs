@@ -7,9 +7,12 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using TheEleganceShop.Data;
 using TheEleganceShop.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TheEleganceShop.Pages.Products
 {
+
+    [Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly TheEleganceShop.Data.ApplicationDbContext _context;

@@ -17,6 +17,7 @@ namespace TheEleganceShop.Models
         public decimal? ProductPrice { get; set; }
 
         [Display(Name = "Current Stock")]
+        [Range(0, 100)]
         public int? ProductStockQuantity { get; set; }
 
         [Display(Name = "Category")]
@@ -27,11 +28,13 @@ namespace TheEleganceShop.Models
 
         public int? ProductshoeSize { get; set; }
 
-        // List to serve as a navigation property to the OrderDetails junction model
+
+
+
+        // List to serve as my navigation property to the OrderDetails junction model
         public List <OrderDetail>? OrderDetails { get; set; }
 
 
-        // Navigation list to the junction table 
         public List<CartProduct>? CartProducts { get; set; }
 
 

@@ -2,10 +2,23 @@
 @model TheEleganceShop.Pages.Products.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Products";
 }
 
-<h1>Index</h1>
+<h1> Product List </h1>
+
+<style>
+    body {
+        background-color: black;
+        font-weight: 400;
+        text-align: center;
+        color: white;
+    }
+
+    th, td {
+        color: white;
+    }
+</style>
 
 <p>
     <a asp-page="Create">Create New</a>

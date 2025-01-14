@@ -8,6 +8,27 @@ namespace TheEleganceShop.Data
 {
     public class DbInitializer
     {
+
+        /*
+         matthew sharpe , manuel zubiri
+
+        SEED DATA USERNAME AND PASSWORD 
+
+        -------ADMIN--------
+
+        USER -     matthewsharpe@TES.COM
+        PW   -     MSHARPE  
+         
+
+
+        ----- CUSTOMER -------
+        USER -     example123@example.com
+        PW   -     MSHARPE  
+         
+
+
+         */
+
         public static void Initialize(ApplicationDbContext context)
         {
             // Checking   if any products already exist 
@@ -143,7 +164,19 @@ namespace TheEleganceShop.Data
                     ProductCategory = "Unisex",
                     ProductImageUrl = "/img/questionMark.jpg",
                     ProductshoeSize = 10
+                },
+
+                new Product
+                {
+                    ProductName = "Special Logo",
+                    ProductDescription = "EXEMPT",
+                    ProductPrice = 0.0m,
+                    ProductStockQuantity = 0,
+                    ProductCategory = "NA",
+                    ProductImageUrl = "/img/elegance.jpg",
+                    ProductshoeSize = 0
                 }
+
             };
 
 
